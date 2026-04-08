@@ -1,116 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const navLinks = document.querySelectorAll('header nav a');
-    const contactForm = document.querySelector('.contact-form');
-    const emailInput = document.getElementById("email");
-    const telefoneInput = document.getElementById("telefone");
+    console.log("JS carregado 🚀");
 
-    // 🔽 SCROLL SUAVE
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+    // 🔍 Verifica EmailJS
+    if (typeof emailjs === "undefined") {
+        console.error("❌ EmailJS NÃO carregou");
+        alert("Erro: EmailJS não carregou!");
+        return;
+    }
 
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
+    console.log("✅ EmailJS carregado");
+
+    // 🔑 CONFIGURE AQUI
+    const PUBLIC_KEY = "3eeA93KVPjbDiy0cR";
+    const SERVICE_ID = "service_5fg7mer";
+    const TEMPLATE_ID = "template_411y4x5";
+
+    emailjs.init(PUBLIC_KEY);
+
+    const form = document.getElementById("contactForm");
+
+    if (!form) {
+        console.error("❌ Formulário não encontrado");
+        return;
+    }
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        console.log("📨 Tentando enviar...");
+
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const telefone = document.getElementById("telefone").value.trim();
+        const mensagem = document.getElementById("mensagem").value.trim();
+
+        if (!nome || !email || !mensagem) {
+            alert("Preencha os campos obrigatórios!");
+            return;
+        }
+
+        const params = {
+            nome: nome,
+            email: email,
+            telefone: telefone,
+            mensagem: mensagem
+        };
+
+        console.log("📦 PARAMS:", params);
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+        .then((res) => {
+            console.log("✅ SUCESSO:", res);
+            alert("Mensagem enviada com sucesso!");
+            form.reset();
+        })
+        .catch((err) => {
+            console.error("❌ ERRO COMPLETO:", err);
+            alert("Erro ao enviar. Veja o console (F12).");
+        });
+
+    }); // ✅ FECHADO CORRETAMENTE
+
+    // 🎯 Animações on scroll
+    const sections = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
 
-    // 📧 CORREÇÃO DE EMAIL
-    if (emailInput) {
-        emailInput.addEventListener("blur", () => {
-            let email = emailInput.value.toLowerCase();
-
-            const correcoes = {
-                "gmai.com": "gmail.com",
-                "gmil.com": "gmail.com",
-                "gmail.con": "gmail.com",
-                "yaho.com": "yahoo.com",
-                "yahho.com": "yahoo.com"
-            };
-
-            const partes = email.split("@");
-
-            if (partes.length === 2) {
-                let dominio = partes[1];
-
-                if (correcoes[dominio]) {
-                    const novoEmail = `${partes[0]}@${correcoes[dominio]}`;
-
-                    if (confirm(`Você quis dizer ${novoEmail}?`)) {
-                        emailInput.value = novoEmail;
-                    }
-                }
-            }
-        });
-    }
-
-    // 📱 FORMATA TELEFONE
-    if (telefoneInput) {
-        telefoneInput.addEventListener("input", () => {
-            let valor = telefoneInput.value.replace(/\D/g, "");
-
-            if (!valor.startsWith("55")) {
-                valor = "55" + valor;
-            }
-
-            valor = valor.substring(0, 13);
-
-            let formatado = "";
-
-            if (valor.length > 2) {
-                formatado = "+" + valor.substring(0, 2);
-            }
-
-            if (valor.length > 4) {
-                formatado += " (" + valor.substring(2, 4) + ")";
-            }
-
-            if (valor.length > 9) {
-                formatado += " " + valor.substring(4, 9) + "-" + valor.substring(9);
-            } else if (valor.length > 4) {
-                formatado += " " + valor.substring(4);
-            }
-
-            telefoneInput.value = formatado;
-        });
-    }
-
-    // 🚀 ENVIO DO FORMULÁRIO
-    if (contactForm) {
-        contactForm.addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const nome = document.getElementById("nome").value.trim();
-            const email = emailInput.value.trim();
-            const telefone = telefoneInput.value.trim();
-            const mensagem = document.getElementById("mensagem").value.trim();
-
-            if (!nome || !email || !mensagem) {
-                alert("Preencha nome, email e mensagem!");
-                return;
-            }
-
-            if (!/\S+@\S+\.\S+/.test(email)) {
-                alert("Email inválido!");
-                return;
-            }
-
-            const texto = `Olá, me chamo ${nome}%0AEmail: ${email}%0ATelefone: ${telefone}%0AMensagem: ${mensagem}`;
-
-            const numero = "5512991481679";
-            const whatsappURL = `https://wa.me/${numero}?text=${texto}`;
-
-            const emailURL = `mailto:kiki24012008@gmail.com?subject=Interesse no Isabel Residencial&body=${texto}`;
-
-            if (/Android|iPhone/i.test(navigator.userAgent)) {
-                window.open(whatsappURL, "_blank");
-            } else {
-                window.location.href = emailURL;
-            }
-        });
-    }
-
-});
+}); // ✅ FECHAMENTO FINAL
