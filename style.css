@@ -77,6 +77,183 @@ body {
     overflow-x: hidden;
 }
 
+/* ============================================
+   CLASSES DE ANIMAÇÃO - APLICADAS PRO JS
+   ============================================ */
+
+/* Animações ao scroll - fade up */
+.animate-fade-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-up:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.animate-fade-up:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.animate-fade-up:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.animate-fade-up:nth-child(n+5) {
+    animation-delay: 0.4s;
+}
+
+/* Animações ao scroll - scale in */
+.animate-scale {
+    animation: scaleInUp 0.6s ease forwards;
+}
+
+.animate-scale:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.animate-scale:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.animate-scale:nth-child(n+4) {
+    animation-delay: 0.3s;
+}
+
+/* Animações ao scroll - slide in left */
+.animate-slide-left {
+    animation: slideInLeft 0.7s ease forwards;
+}
+
+/* Animações ao scroll - slide in right */
+.animate-slide-right {
+    animation: slideInRight 0.7s ease forwards;
+}
+
+/* Animações ao scroll - bounce */
+.animate-bounce {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+/* Animações ao scroll - rotate */
+.animate-rotate {
+    animation: rotateIn 0.6s ease forwards;
+}
+
+/* Animações ao scroll - flip */
+.animate-flip {
+    animation: flipInX 0.6s ease forwards;
+}
+
+/* Versão desabilitada - antes de scroll */
+[data-animate] {
+    opacity: 0;
+}
+
+[data-animate].visible {
+    opacity: 1;
+}
+
+/* ============================================
+   ANIMAÇÕES DE PÁGINA LOAD
+   ============================================ */
+
+body.loaded .loader {
+    opacity: 0;
+    pointer-events: none;
+}
+
+header {
+    animation: slideDown 0.6s ease;
+}
+
+#hero .hero-text {
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+#hero .hero-image {
+    animation: fadeInRight 0.8s ease 0.4s both;
+}
+
+#hero .badge {
+    animation: slideDown 0.6s ease;
+}
+
+/* ============================================
+   ANIMAÇÕES PADRÃO DE SEÇÕES
+   ============================================ */
+
+section.visible {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+section h2,
+section h3,
+section dt {
+    opacity: 0;
+    animation: fadeInDown 0.7s ease 0.3s forwards;
+}
+
+section p,
+section dd {
+    opacity: 0;
+    animation: fadeInUp 0.7s ease 0.4s forwards;
+}
+
+.column {
+    opacity: 0;
+    animation: scaleInUp 0.6s ease forwards;
+}
+
+.column:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.column:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.column:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.photo-item {
+    opacity: 0;
+    animation: fadeInUp 0.7s ease forwards;
+}
+
+.photo-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.photo-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.photo-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+#description li {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+#description li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+#description li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+#description li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+#description li:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
 /* CONTAINER PADRÃO */
 .container {
     max-width: 1200px;
@@ -220,6 +397,7 @@ nav a:hover::after {
 .hero-image img:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 32px rgba(0, 204, 102, 0.3);
+    animation: float 2s ease-in-out infinite;
 }
 
 .hero-actions {
@@ -229,10 +407,464 @@ nav a:hover::after {
     align-items: center;
 }
 
+/* ============================================
+   ANIMAÇÃO DE ENTRADA - PAGE LOAD INTRO
+   ============================================ */
+
+/* Overlay de entrada */
+.page-load-intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-secondary) 50%, var(--color-primary) 100%);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    animation: introFadeOut 1s ease 2.5s forwards;
+    pointer-events: none;
+}
+
+.page-load-intro.hide {
+    display: none;
+}
+
+/* Logo animado na entrada */
+.intro-logo {
+    width: 120px;
+    height: 120px;
+    background: var(--color-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: introBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    box-shadow: 0 20px 50px rgba(0, 204, 102, 0.5);
+}
+
+.intro-logo img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Texto de boas-vindas */
+.intro-text {
+    color: var(--color-light);
+    text-align: center;
+    animation: fadeInUp 0.8s ease 0.3s forwards;
+    opacity: 0;
+}
+
+.intro-text h1 {
+    font-family: var(--font-secondary);
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    letter-spacing: -2px;
+}
+
+.intro-text p {
+    font-size: 1.8rem;
+    color: #ddd;
+}
+
+/* Linha carregamento */
+.intro-progress {
+    width: 60px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: var(--spacing-md);
+}
+
+.intro-progress-bar {
+    height: 100%;
+    background: var(--color-primary);
+    animation: introProgress 2.5s ease-in forwards;
+    box-shadow: 0 0 10px rgba(0, 204, 102, 0.8);
+}
+
+/* Animações de entrada */
+@keyframes introBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    50% {
+        opacity: 1;
+    }
+    70% {
+        transform: scale(1.15) rotate(0);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes introProgress {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes introFadeOut {
+    0% {
+        opacity: 1;
+        pointer-events: all;
+    }
+    100% {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/* ============================================
+   ANIMAÇÃO DE NAVEGAÇÃO - LINK TRANSITION
+   ============================================ */
+
+/* === OPÇÃO 1: SLIDE ELEGANTE === */
+.transition-slide-top {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-dark) 100%);
+    z-index: 9998;
+    pointer-events: none;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.transition-slide-top.active {
+    display: block;
+    visibility: visible;
+    animation: slideDownFull 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideDownFull {
+    0% {
+        top: -100%;
+    }
+    50% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* === OPÇÃO 2: CIRCLE EXPAND === */
+.transition-circle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.transition-circle.active {
+    display: block;
+    visibility: visible;
+    animation: circleExpand 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes circleExpand {
+    from {
+        width: 50px;
+        height: 50px;
+        opacity: 1;
+    }
+    to {
+        width: 200vmax;
+        height: 200vmax;
+        opacity: 1;
+    }
+}
+
+/* ANIMAÇÃO DE SAÍDA - QUANDO SAIR DO SITE */
+.exit-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    z-index: 9999;
+    pointer-events: none;
+    animation: exitFadeOut 0.5s ease-in forwards;
+}
+
+@keyframes exitFadeOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* === OPÇÃO 3: FADE CROSS === */
+.transition-cross-h,
+.transition-cross-v {
+    position: fixed;
+    background: var(--color-primary);
+    z-index: 9998;
+    pointer-events: none;
+}
+
+.transition-cross-h {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    transform: translateY(-50%);
+}
+
+.transition-cross-v {
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+.transition-cross-h.active {
+    animation: crossHorizontal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.transition-cross-v.active {
+    animation: crossVertical 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes crossHorizontal {
+    0% {
+        width: 100%;
+        left: 0;
+    }
+    50% {
+        width: 100%;
+        left: 0;
+    }
+    100% {
+        width: 0;
+        left: 100%;
+    }
+}
+
+@keyframes crossVertical {
+    0% {
+        height: 100%;
+        top: 0;
+    }
+    50% {
+        height: 100%;
+        top: 0;
+    }
+    100% {
+        height: 0;
+        top: 100%;
+    }
+}
+
+/* === OPÇÃO 4: WAVE EFFECT === */
+.transition-wave {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    z-index: 9998;
+    pointer-events: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.transition-wave.active {
+    animation: waveEffect 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes waveEffect {
+    0% {
+        clip-path: polygon(
+            0% 45%,
+            5% 48%,
+            10% 50%,
+            15% 48%,
+            20% 45%,
+            25% 48%,
+            30% 50%,
+            35% 48%,
+            40% 45%,
+            45% 48%,
+            50% 50%,
+            55% 48%,
+            60% 45%,
+            65% 48%,
+            70% 50%,
+            75% 48%,
+            80% 45%,
+            85% 48%,
+            90% 50%,
+            95% 48%,
+            100% 45%,
+            100% 100%,
+            0% 100%
+        );
+    }
+    100% {
+        clip-path: polygon(
+            0% 0%,
+            5% 0%,
+            10% 0%,
+            15% 0%,
+            20% 0%,
+            25% 0%,
+            30% 0%,
+            35% 0%,
+            40% 0%,
+            45% 0%,
+            50% 0%,
+            55% 0%,
+            60% 0%,
+            65% 0%,
+            70% 0%,
+            75% 0%,
+            80% 0%,
+            85% 0%,
+            90% 0%,
+            95% 0%,
+            100% 0%,
+            100% 100%,
+            0% 100%
+        );
+    }
+}
+
+/* === OPÇÃO 5: SPLIT FADE === */
+.transition-split-left,
+.transition-split-right {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: var(--color-primary);
+    z-index: 9998;
+    pointer-events: none;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.transition-split-left {
+    left: 0;
+}
+
+.transition-split-right {
+    right: 0;
+}
+
+.transition-split-left.active {
+    display: block;
+    visibility: visible;
+    animation: splitLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.transition-split-right.active {
+    display: block;
+    visibility: visible;
+    animation: splitRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes splitLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+}
+
+@keyframes splitRight {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+}
+
+/* === OPÇÃO 6: DIAGONAL SWEEP === */
+.transition-diagonal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    z-index: 9998;
+    pointer-events: none;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.transition-diagonal.active {
+    display: block;
+    visibility: visible;
+    animation: diagonalSweep 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes diagonalSweep {
+    0% {
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+    50% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    100% {
+        clip-path: polygon(100% 100%, 100% 0, 100% 100%);
+    }
+}
+
+/* Fade In Up - Entrada de baixo */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
     }
     to {
         opacity: 1;
@@ -240,10 +872,177 @@ nav a:hover::after {
     }
 }
 
+/* Fade In Down - Entrada de cima */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Left - Entrada da esquerda */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade In Right - Entrada da direita */
 @keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateX(30px);
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale In - Zoom de entrada */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Scale In Up - Zoom com movimento */
+@keyframes scaleInUp {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Rotate In - Rotação de entrada */
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+/* Flip In - Efeito flip */
+@keyframes flipInX {
+    from {
+        opacity: 0;
+        transform: perspective(400px) rotateX(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(400px) rotateX(0);
+    }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Slide Down - Página load */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse - Pulsação */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Glow - Efeito brilho */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 204, 102, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 204, 102, 0.8);
+    }
+}
+
+/* Float - Flutuação */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Shimmer - Efeito shimmer */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
     }
     to {
         opacity: 1;
@@ -326,6 +1125,7 @@ nav a:hover::after {
     background: #00b852;
     box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
     transform: translateY(-2px);
+    animation: glow 1.5s ease-in-out infinite;
 }
 
 .btn-primary:active {
@@ -654,6 +1454,7 @@ nav a:hover::after {
     background: var(--color-dark);
     border-top: 2px solid var(--color-primary);
     flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .partner-box {
@@ -667,13 +1468,24 @@ nav a:hover::after {
     border: 1px solid var(--color-border);
     transition: var(--transition);
     text-decoration: none;
+    opacity: 0;
+    animation: scaleInUp 0.6s ease forwards;
+}
+
+.partner-box:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.partner-box:nth-child(2) {
+    animation-delay: 0.2s;
 }
 
 .partner-box:hover {
     background: var(--color-primary);
     border-color: var(--color-primary);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .partner-box img {
@@ -707,17 +1519,25 @@ nav a:hover::after {
     border: none;
     cursor: pointer;
     text-decoration: none;
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
+    opacity: 0;
 }
 
 .whatsapp-button:hover {
     transform: scale(1.1) translateY(-4px);
     box-shadow: 0 10px 30px rgba(0, 204, 102, 0.4);
+    animation: glow 1.5s ease-in-out infinite;
+}
+
+.whatsapp-button:active {
+    transform: scale(1) translateY(-2px);
 }
 
 .whatsapp-button img {
     width: 35px;
     height: 35px;
     object-fit: contain;
+    animation: float 3s ease-in-out infinite;
 }
 
 /* ============================================
@@ -729,12 +1549,18 @@ footer {
     text-align: center;
     padding: var(--spacing-xl) var(--spacing-lg);
     border-top: 1px solid var(--color-border);
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 footer p {
     margin: 0;
     font-size: var(--font-size-sm);
     color: #999;
+    transition: var(--transition);
+}
+
+footer p:hover {
+    color: var(--color-primary);
 }
 
 /* ============================================
