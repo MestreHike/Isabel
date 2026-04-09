@@ -1520,7 +1520,7 @@ nav a:hover::after {
     cursor: pointer;
     text-decoration: none;
     animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s forwards;
-    opacity: 0;
+    opacity: 1;
 }
 
 .whatsapp-button:hover {
